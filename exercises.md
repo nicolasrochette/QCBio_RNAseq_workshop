@@ -163,8 +163,9 @@ Hoffman-2 cluster doesn't provide Trimmomatic, but there is a copy of it in
 the `programs/` subdirectory of the workshop data.
 
 *Note: The `.jar` extention in the program name indicates it is a Java
-program, and should be run not directly but through the Java program, like so:
-`java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar`.*
+program, and should be run not directly but through the Java program, like so:*
+
+```java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar```
 
 *Note: On Hoffman-2, to run the Java program you first need to load the Java
 module, by entering the command `module load java`.*
