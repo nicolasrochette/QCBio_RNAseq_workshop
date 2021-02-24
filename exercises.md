@@ -310,7 +310,7 @@ open our BAM files in IGV.
 5. Navigate to the PDE6C gene using the search box. How do the two samples
    differ?
 
-Exercise 5: Quantifying pre-gene expression
+Exercise 5: Quantifying per-gene expression
 ----------
 
 ### 5A: Installing HTSeq
