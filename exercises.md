@@ -307,7 +307,7 @@ open our BAM files in IGV.
 4. Start IGV, and open the mouse `mm10` genome. Go to File > Load from file
    and open your two BAM files.
 
-5. Navigate to the PDE6C gene using the search box. How do the two samples
+5. Navigate to the Pde6c gene using the search box. How do the two samples
    differ?
 
 Exercise 5: Quantifying per-gene expression
