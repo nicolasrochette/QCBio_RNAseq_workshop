@@ -85,9 +85,45 @@ Exercise 2
 ### 2A
 
 1. How long is the first read? Does this match the figure from the table?
+
+The first read is written on the first 4 lines of the FASTQ files, so we can
+print it with:
+
+```zcat P10KO_rep1.fastq.gz | head -n4```
+
+We can then copy-paste the sequence and use `echo` and `wc` to count the number
+of characters, taking care use echo's `-n` option to avoid adding a newline
+(`\n`) character:
+
+```echo -n "GCTGTTTAGAATTCAATGAAAATGAAGCCAAAAAAAAAAAAAAAAACTTACGGGACACAATGAAAACTTGGAGGAA" | wc```
+
+This read is 76 basepairs long; this matches the figure from the table.
+
+There are many other ways to get to this information, for instance with
+
+```zcat P10KO_rep1.fastq.gz | head -n2 | tail -n1 | tr -d '\n' | wc -c```
+
+or, with awk programming, using the `length()` function, etc.
+
 2. What is the PHRED-scaled confidence for the first base call of the first read?
+
+For the first base of the first read the quality character is `G`, which is
+ASCII code 71, and corresponds to a quality of 38 in standard PHRED-33 encoding.
+
 3. How many lines does the file have in total?
+
+```gzip -cd P10KO_rep1.fastq.gz | wc -l```
+
+The file has 8,918,036 lines.
+
 4. How many reads does this represent?
+
+There are four lines per reads, so 2,229,509 reads.
+
+It is possible to get to the number of reads directly by running the FASTQ file
+through the `paste - - - -` trick:
+
+```gzip -cd P10KO_rep1.fastq.gz | paste - - - - | wc -l```
 
 ### 2B
 
@@ -135,17 +171,18 @@ The Trimmomatic webpage give the following information:
 The updated command should be:
 
 ```sh
-java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar SE -phred33 ./P10KO_rep1.fastq.gz ./P10KO_rep1.trimmo.fastq.gz LEADING:20 TRAILING:20 SLIDINGWINDOW:5:20 MINLEN:60
+java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar SE -phred33 -threads 1 ./P10KO_rep1.fastq.gz ./P10KO_rep1.trimmo.fastq.gz LEADING:20 TRAILING:20 SLIDINGWINDOW:5:20 MINLEN:60 ILLUMINACLIP:$HOME/QCBio_RNAseq1/programs/trimmomatic/adapters/TruSeq2-SE.fa:2:30:10
 ```
 
 For convenience, this can also be written with backslashes:
 
 ```sh
 java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar \
-    SE -phred33 \
+    SE -phred33 -threads 1 \
     ./P10KO_rep1.fastq.gz \
     ./P10KO_rep1.trimmo.fastq.gz \
-    LEADING:20 TRAILING:20 SLIDINGWINDOW:5:20 MINLEN:60
+    LEADING:20 TRAILING:20 SLIDINGWINDOW:5:20 MINLEN:60 \
+    ILLUMINACLIP:$HOME/QCBio_RNAseq1/programs/trimmomatic/adapters/TruSeq2-SE.fa:2:30:10
 ```
 
 4. Run the command
