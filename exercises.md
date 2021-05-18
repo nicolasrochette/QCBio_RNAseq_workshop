@@ -192,11 +192,10 @@ java -jar trimmomatic-0.35.jar SE -phred33 input.fq.gz output.fq.gz ILLUMINACLIP
 * it uses `P10KO_rep1.fastq.gz` as its input file;
 * the output file is named after the `P10KO_rep1` sample, for instance
   `P10KO_rep1.trimmo.fastq.gz`;
-* it uses the TrueSeq-v2 single-end adapters (c.f. the article's Methods
-  section) -- you will need to specify the full path to the adapter sequences,
-  `~/QCBio_RNAseq1/programs/trimmomatic/adapters/TruSeq2-SE.fa` *(Note:
-  alternatively, to make this more simple, just entirely delete the
-  `ILUMINACLIP` part from the command)*;
+* it uses the TrueSeq-v2 single-end adapters (c.f. the Material & Methods
+  section of the original publication) -- you will need to specify the full path
+  (see below) to the adapter sequences (note: alternatively, to make this more
+  simple, you may justentirely delete the `ILUMINACLIP` part from the command*);
 * ask for minimum leading & trailing base qualities of 20;
 * ask for a minimum base quality of 20 over a 5-basepair window;
 * ask for a minimum final read length of 60 basepairs (or 80% of the raw read
@@ -204,11 +203,15 @@ java -jar trimmomatic-0.35.jar SE -phred33 input.fq.gz output.fq.gz ILLUMINACLIP
 * at the end of the command line, add the option `-threads 1` (this is to use a
   single thread/processor, as the default is to use several)
 
-4. Run the command, wait for completion, then make sure the output file exists
+1. Run the command, wait for completion, then make sure the output file exists
    and is not empty. (If errors occurred, fix your command and retry.)
 
-5. Modify the command to process the other sample (`P10_rep1`); run it, and
+2. Modify the command to process the other sample (`P10_rep1`); run it, and
    check the output file.
+
+Path to TrueSeq-v2 adapter sequences:
+
+```~/QCBio_RNAseq1/programs/trimmomatic/adapters/TruSeq2-SE.fa```
 
 Exercise 4: Aligning reads to the reference genome
 ----------
