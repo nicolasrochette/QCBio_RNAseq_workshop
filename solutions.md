@@ -206,20 +206,23 @@ java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar \
     SE -phred33 \
     ./$sample.fastq.gz \
     ./$sample.trimmo.fastq.gz \
-    LEADING:20 TRAILING:20 SLIDINGWINDOW:5:20 MINLEN:60
+    LEADING:20 TRAILING:20 SLIDINGWINDOW:5:20 MINLEN:60 \
+    ILLUMINACLIP:$HOME/QCBio_RNAseq1/programs/trimmomatic/adapters/TruSeq2-SE.fa:2:30:10
 ```
 
 This also makes it straightforward to process all our samples (just two in
 this case, but it could be any number) with a **for loop**:
 
 ```sh
+adapters=$HOME/QCBio_RNAseq1/programs/trimmomatic/adapters/TruSeq2-SE.fa
 for sample in P10KO_rep1 P10_rep1
 do
     java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar \
         SE -phred33 \
         ./$sample.fastq.gz \
         ./$sample.trimmo.fastq.gz \
-        LEADING:20 TRAILING:20 SLIDINGWINDOW:5:20 MINLEN:60
+        LEADING:20 TRAILING:20 SLIDINGWINDOW:5:20 MINLEN:60 \
+        ILLUMINACLIP:$adapters:2:30:10
 done
 ```
 

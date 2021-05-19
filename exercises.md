@@ -165,16 +165,22 @@ the `programs/` subdirectory of the workshop data.
 *Note: The `.jar` extention in the program name indicates it is a Java
 program, and should be run not directly but through the Java program, like so:*
 
-```java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar```
+```sh
+java -jar ~/QCBio_RNAseq1/programs/trimmomatic/trimmomatic-0.39.jar
+```
 
 *Note: On Hoffman-2, to run the Java program you first need to load the Java
 module, by entering the command `module load java`.*
 
 Unlike most programs, Trimmomatic does not have much built-in documentation --
 in particular, the `-h`/`--help` documentation is only minimaly useful. We can
-instead refer to the Trimmomatic website
-(`http://www.usadellab.org/cms/?page=trimmomatic`), which gives this example for
-single-end data:
+instead refer to the Trimmomatic website:
+
+```txt
+http://www.usadellab.org/cms/?page=trimmomatic
+```
+
+The website gives this example for single-end data:
 
 ```sh
 java -jar trimmomatic-0.35.jar SE -phred33 input.fq.gz output.fq.gz ILLUMINACLIP:TruSeq3-SE:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
@@ -211,7 +217,9 @@ java -jar trimmomatic-0.35.jar SE -phred33 input.fq.gz output.fq.gz ILLUMINACLIP
 
 Path to TrueSeq-v2 adapter sequences:
 
-```~/QCBio_RNAseq1/programs/trimmomatic/adapters/TruSeq2-SE.fa```
+```txt
+~/QCBio_RNAseq1/programs/trimmomatic/adapters/TruSeq2-SE.fa
+```
 
 Exercise 4: Aligning reads to the reference genome
 ----------
@@ -297,8 +305,11 @@ diversity or splicing.
 One popular visualization tool is the Integrated Genomics Viewer (IGV); let's
 open our BAM files in IGV.
 
-1. Install IGV on your laptop. You can download it from its homepage,
-   `https://software.broadinstitute.org/software/igv/`.
+1. Install IGV on your laptop. You can download it from its homepage:
+
+```txt
+https://software.broadinstitute.org/software/igv/
+```
 
 2. On the cluster, using the SAMtools program, create indexes for each of your
    two read alignment (BAM) files. the `samtools index` command (you will first
