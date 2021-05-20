@@ -345,7 +345,8 @@ This will install HTSeq at `~/.local/bin/htseq-count`.
 
 ### 5B: Tallying per-gene read counts
 
-Use HTSeq to count the number of reads mapping to each gene. 
+1. Use HTSeq to count the number of reads mapping to each gene for sample
+   `P10_rep1`.
 
 ```sh
 cd ~/QCBio_RNAseq1/day3/
@@ -366,18 +367,23 @@ This should take about 1 minute. Make sure you understand what the above command
 is doing; the htseq-count options are described in the HTSeq help
 (available with `htseq-count --help`).
 
-### 5C: (Optional) Merging all samples' counts into one big table
+2. Adjust the command above to tally per-gene counts for the other sample,
+   `P10KO_rep1`.
+
+### 5C: Merging all samples' counts into one big table
 
 HTSeq generates a separate table of per-gene read counts for each sample. For
 statistical analyses, it is more practical to merge all these tables into one
 large table comprising the counts at all genes and for all samples.
 
 There are many alternative ways to generate such a table; one such way is using
-the R package edgeR.
+the R package `edgeR`.
 
-1. On the cluster, load the R module (`module load R/3.6.1`) and start an R
-   session.
-2. Check whether the `edgeR` package is installed by trying to load it:
+1. On the cluster, load the R module (`module load R/3.6.1`).
+
+2. Start an interactive R session by entering the command, `R`.
+
+3. Check whether the `edgeR` package is installed by trying to load it:
    `library('edgeR')`. If not, you need to install it by running:
 
 ```R
@@ -385,13 +391,13 @@ install.packages("BiocManager")
 BiocManager::install("edgeR")
 ```
 
-3. Still in R, load, merge, and save the global counts table using the
+4. Still in R, load, merge, and save the global counts table using the
    following R commands:
 
 ```R
 library(edgeR)
 samples <- c('P10KO_rep1', 'P10_rep1')
-files <- paste0(samples,'.Aligned.sortedByCoord.out.bam.pergene_counts')
+files <- paste0('./', samples, '.pergene_counts')
 counts <- readDGE(files, labels=samples, header=FALSE)
 write.csv(counts$counts, 'counts.csv')
 ```
