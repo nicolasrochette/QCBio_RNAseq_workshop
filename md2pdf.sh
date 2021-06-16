@@ -12,6 +12,12 @@ if [[ $# -ne 1 ]] || [[ $1 =~ ^(-h|--help) ]] ;then
     exit 1
 fi
 
+# Check that PanDoc is installed
+if ! command -v pandoc &>/dev/null ;then
+    echo "Error: pandoc not installed/not found." >&2
+    exit 1
+fi
+
 md="$1"
 ls -L -- "$md" >/dev/null || exit
 
